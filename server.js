@@ -1,12 +1,10 @@
 const express = require("express");
 const cors = require("cors");
-var bodyParser = require("body-parser");
 
 const sendOrdersRouter = require("./routes/sendOrders");
 
 const app = express();
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
+app.use(express.json());
 app.use(cors());
 
 const port = 8080;
