@@ -23,11 +23,18 @@ function createClient() {
 
 async function sendOrder(orderObject) {
     const client = await createClient();
+    const orderWithItems = {
+        ...orderObject,
+        OrderedItems: {
+            OrderedItem: orderObject.OrderedItems,
+        },
+    };
     return new Promise((resolve, reject) => {
-        client.AddOrder({ Order: orderObject }, (err, result) => {
+        client.AddOrder({ Order: orderWithItems }, (err, result) => {
             if (err) {
                 return reject(err);
             }
+            console.log(client.lastRequest);
             resolve(result);
         });
     });
